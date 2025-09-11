@@ -3,8 +3,24 @@ name = "week03-homework"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 dependencies = [
-	"python-dotenv",
+	"llama-index>=0.13.6",
+	"llama-index-core>=0.13.6",
+	"llama-index-embeddings-dashscope>=0.4.0",
+	"llama-index-llms-dashscope>=0.5.0",
+	"llama-index-llms-openai-like>=0.5.0",
 	# add your dependencies here and run `uv sync` to install them
+	"python-dotenv>=1.1.1",
+	"torch>=2.8.0",
+]
+
+[[tool.uv.index]]
+url = "https://mirrors.aliyun.com/pypi/simple"
+default = true
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.30.1",
+    "ipywidgets>=8.1.7",
 ]

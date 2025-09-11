@@ -1,0 +1,11 @@
+{
+  "typeCheckingMode": "standard",
+  "reportMissingTypeStubs": false,
+  "reportMissingImports": true,
+  "reportUnusedImport": true,
+  "reportUnusedCallResult": true,
+  "reportUnusedVariable": true,
+  "reportUntypedFunctionDecorator": true,
+  "reportUntypedClassDecorator": true,
+  "reportUntypedNamedTuple": true,
+}
