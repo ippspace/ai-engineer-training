@@ -218,3 +218,4 @@ week02/requirements.txt
 week02/uv.lock
 
 .codebuddy/
+temp_files/
