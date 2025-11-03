@@ -3,8 +3,10 @@ name = "week04-homework"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 dependencies = [
+	"langchain>=1.0.3",
+	"langchain-openai>=1.0.1",
 	"python-dotenv",
 	# add your dependencies here and run `uv sync` to install them
 ]

@@ -3,5 +3,6 @@
   "reportAny": false,
   "reportExplicitAny": false,
   "reportUnknownMemberType": false,
-  "reportUnknownVariableType": false
+  "reportUnknownVariableType": false,
+  "reportUnannotatedClassAttribute": false,
 }
