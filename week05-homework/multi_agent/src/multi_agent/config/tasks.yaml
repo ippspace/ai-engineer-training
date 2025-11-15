@@ -1,0 +1,54 @@
+research_task:
+  description: >
+    使用搜索工具对「{topic}」进行系统性研究，输出结构化资料，重点包含：
+    1）关键概念与定义 2）发展历史与最新趋势 3）挑战与机遇 4）典型应用与案例 5）未来展望
+    请以 JSON 结构返回：{ "sections": list, "key_points": list, "sources": list }
+  expected_output: >
+    一个结构化 JSON：包含 sections（分节标题与摘要）、key_points（要点列表）、sources（含标题与链接）。
+  agent: research_agent
+
+writing_task:
+  description: >
+    基于研究任务的输出，生成中文文章初稿。参数：风格（如：科普/技术），长度（短/中/长）。
+    请以 JSON 结构返回：{ "draft_markdown": str, "meta": { "style": str, "length": str } }
+  expected_output: >
+    一个包含 Markdown 初稿与元信息的 JSON，对研究资料进行合理编排与引用。
+  agent: writing_agent
+  context:
+    - research_task
+
+review_task:
+  description: >
+    对初稿进行质量与逻辑审核，输出结构化评分与问题清单。
+    请以 JSON 结构返回：{ "status": "ok"|"needs_changes", "quality_score": int,
+    "issues": list[str], "suggestions": list[str] }
+  expected_output: >
+    一个结构化 JSON，若需要修改，需明确指出问题与可操作建议。
+  agent: review_agent
+  context:
+    - writing_task
+
+fallback_review_task:
+  description: >
+    当基础审核失败或输出不合规时，进行高级复核。仅在上一任务 status!="ok" 时执行。
+    返回结构与审核任务一致。
+  expected_output: >
+    一个结构化 JSON 的高级审核结果。
+  agent: senior_review_agent
+  context:
+    - writing_task
+    - review_task
+
+polishing_task:
+  description: >
+    根据审核或高级审核的建议，优化语言与结构，输出终稿 Markdown。
+  expected_output: >
+    一个包含终稿 Markdown 文件。该文档包含两部分：
+    1. 研究的最终文稿
+    2. 异常处理日志（如果有重试或者异常过程）
+  agent: polishing_agent
+  context:
+    - writing_task
+    - review_task
+    - fallback_review_task
+  output_file: result.md
